@@ -1,9 +1,20 @@
-# Binary Handshake Rules
+class SecretHandshake
+  def initialize(bin)
+    @bin_arr = bin.split("")
+  end
 
-# 1 = "wink"
-# 10 = "double blink"
-# 100 = "close your eyes"
-# 1000 = "jump"
-# 10000 = Reverse the order of the operations in the secret handshake.
+  def commands
+    handshake = []
+    cmnd_hash = {
+      -1 => "wink",
+      -2 => "double blink",
+      -3 => "close your eyes",
+      -4 => "jump"
+    }
 
-# Write your code here.
+    handshake.concat(cmnd_hash.select{|key| @bin_arr[key] == "1"}.values)
+    handshake.reverse! if @bin_arr[-5] == "1"
+
+    handshake
+  end
+end
